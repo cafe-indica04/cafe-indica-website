@@ -7,18 +7,21 @@
     <style>
         :root { --cafe-brown: #6f4e37; --bg-cream: #fdf5e6; --whatsapp-green: #25d366; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-cream); margin: 0; padding-bottom: 120px; color: #333; }
-        .header { text-align: center; background: var(--cafe-brown); color: white; padding: 25px 10px; border-radius: 0 0 30px 30px; }
+        .header { text-align: center; background: var(--cafe-brown); color: white; padding: 25px 10px; border-radius: 0 0 30px 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .logo-img { width: 95px; height: 95px; border-radius: 50%; border: 3px solid white; margin-bottom: 10px; object-fit: cover; background: #fff; }
         .container { padding: 15px; max-width: 600px; margin: auto; }
         .customer-info { background: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .category { background: #e6ccb2; padding: 10px 15px; border-radius: 10px; margin: 20px 0 10px; font-weight: bold; color: var(--cafe-brown); border-left: 6px solid var(--cafe-brown); text-transform: uppercase; }
+        .category { background: #e6ccb2; padding: 10px 15px; border-radius: 10px; margin: 25px 0 10px; font-weight: bold; color: var(--cafe-brown); border-left: 6px solid var(--cafe-brown); text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; }
         .item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 12px 15px; margin-bottom: 8px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .item-name { font-weight: bold; font-size: 1.05em; }
-        .item-price { color: var(--cafe-brown); font-weight: bold; }
-        .qty-controls { display: flex; align-items: center; gap: 10px; }
-        .btn-qty { background: var(--cafe-brown); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 20px; }
+        .item-name { font-weight: bold; font-size: 1.05em; display: block; color: #444; }
+        .item-price { color: var(--cafe-brown); font-weight: bold; font-size: 0.95em; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.8em; margin-right: 5px; }
+        .qty-controls { display: flex; align-items: center; gap: 12px; }
+        .btn-qty { background: var(--cafe-brown); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 20px; font-weight: bold; transition: 0.2s; }
+        .btn-qty:active { transform: scale(0.9); }
+        .qty { font-weight: bold; min-width: 15px; text-align: center; font-size: 1.1em; }
         .footer { position: fixed; bottom: 0; width: 100%; background: white; padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); text-align: center; z-index: 1000; box-sizing: border-box; }
-        .btn-order { background: var(--whatsapp-green); color: white; border: none; padding: 15px; border-radius: 30px; font-size: 18px; font-weight: bold; width: 100%; max-width: 400px; cursor: pointer; }
+        .btn-order { background: var(--whatsapp-green); color: white; border: none; padding: 15px; border-radius: 30px; font-size: 18px; font-weight: bold; width: 100%; max-width: 400px; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4); }
     </style>
 </head>
 <body>
@@ -26,14 +29,15 @@
 <div class="header">
     <img src="logo.jpeg" alt="Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2734/2734033.png'">
     <h1>Cafe Indica</h1>
-    <p>Digital Menu Card</p>
+    <p>Premium Digital Menu</p>
 </div>
 
 <div class="container">
     <div class="customer-info">
-        <label><b>Your Name</b></label>
-        <input type="text" id="custName" placeholder="Enter your name..." style="width:100%; padding:10px; margin-top:5px; border-radius:5px; border:1px solid #ccc;">
+        <label style="font-weight: bold; color: var(--cafe-brown);">Enter Your Name</label>
+        <input type="text" id="custName" placeholder="e.g. Abhay Basfore" style="width:100%; padding:12px; margin-top:8px; border-radius:8px; border:1px solid #ddd; box-sizing: border-box; font-size: 16px;">
     </div>
+
     <div id="menu-container"></div>
 </div>
 
@@ -43,9 +47,39 @@
 
 <script>
     const menuData = [
-        { cat: "🎁 COMBO DEALS", items: [{n: "Fries(M) + Veg Burger + Drink", p: 149}, {n: "2 Chkn Sandwich + 5 Fish Finger", p: 269}]},
-        { cat: "🥪 BURGERS & SANDWICH", items: [{n: "Veg Burger", p: 59}, {n: "Chicken Burger", p: 79}, {n: "Veg Cheese Sandwich", p: 89}]},
-        { cat: "☕ BEVERAGES", items: [{n: "Milk Tea", p: 19}, {n: "Cold Coffee", p: 69}, {n: "Virgin Mojito", p: 79}]}
+        { cat: "🎁 COMBO OFFERS (SAVE BIG)", items: [
+            {n: "Fries(M) + Veg Burger + Drink", p: 149, old: 167},
+            {n: "Fries(M) + Chicken Burger + Drink", p: 167, old: 187},
+            {n: "2 Chkn Sandwich + 5 Fish Finger", p: 269, old: 287}
+        ]},
+        { cat: "☕ TEA & COFFEE", items: [
+            {n: "Milk Tea", p: 19}, {n: "Elaichi Tea", p: 29}, {n: "Black Tea", p: 19}, 
+            {n: "Lemon Tea", p: 14}, {n: "Masala Lemon Tea", p: 19}, {n: "Green Tea", p: 19},
+            {n: "Milk Coffee", p: 29}, {n: "Black Coffee", p: 19}, {n: "Cold Coffee", p: 69},
+            {n: "Vanilla Hot Coffee", p: 49}, {n: "Chocolate Hot Coffee", p: 49}
+        ]},
+        { cat: "🥗 SALAD & SOUP", items: [
+            {n: "High Protein Veg Salad", p: 59}, {n: "High Protein Chicken Salad", p: 129},
+            {n: "Veg Soup + Garlic Bread", p: 99}, {n: "Chicken Soup + Garlic Bread", p: 139}
+        ]},
+        { cat: "🥪 BURGERS & SANDWICH", items: [
+            {n: "Veg Burger", p: 59}, {n: "Chicken Burger", p: 79}, {n: "Veg Cheese Burger", p: 79},
+            {n: "Chicken Cheese Burger", p: 99}, {n: "Grilled Chicken Burger", p: 99},
+            {n: "Veg Sandwich", p: 69}, {n: "Corn Sandwich", p: 79}, {n: "Veg Cheese Sandwich", p: 89}, 
+            {n: "Chicken Sandwich", p: 89}, {n: "Chicken Cheese Sandwich", p: 109}, {n: "Extra Cheese", p: 20}
+        ]},
+        { cat: "🍝 PASTA & MAGGIE", items: [
+            {n: "White Sauce Pasta", p: 99}, {n: "Red Tomato Pasta", p: 99}, {n: "Chicken Pasta", p: 139},
+            {n: "Veg Maggie", p: 49}, {n: "Plain Maggie", p: 39}, {n: "Corn Maggie", p: 59}, {n: "Chicken Maggie", p: 79}
+        ]},
+        { cat: "🍟 SNACKS", items: [
+            {n: "French Fries (M/L)", p: 59}, {n: "Peri Peri French Fries", p: 69}, {n: "Fish Finger (5ps)", p: 119},
+            {n: "Chicken Finger (5ps)", p: 129}, {n: "Chicken Nugget (5ps)", p: 79}, {n: "Chicken Cheese Ball", p: 79}
+        ]},
+        { cat: "🍹 BEVERAGES", items: [
+            {n: "Lime Soda", p: 79}, {n: "Virgin Mojito", p: 79}, {n: "Blue Lagoon", p: 69}, 
+            {n: "Kacha Mango Mojito", p: 69}, {n: "Green Apple Drink", p: 69}
+        ]}
     ];
 
     const container = document.getElementById('menu-container');
@@ -53,39 +87,8 @@
         let html = `<div class="category">${section.cat}</div>`;
         section.items.forEach(item => {
             html += `<div class="item" data-name="${item.n}" data-price="${item.p}">
-                <div><span class="item-name">${item.n}</span><br><span class="item-price">₹${item.p}</span></div>
+                <div><span class="item-name">${item.n}</span><span class="item-price">${item.old ? '<span class="old-price">₹'+item.old+'</span>' : ''}₹${item.p}</span></div>
                 <div class="qty-controls">
                     <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
                     <span class="qty">0</span>
-                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
-                </div>
-            </div>`;
-        });
-        container.innerHTML += html;
-    });
-
-    function changeQty(btn, change) {
-        const qtySpan = btn.parentElement.querySelector('.qty');
-        let currentQty = parseInt(qtySpan.innerText);
-        currentQty = Math.max(0, currentQty + change);
-        qtySpan.innerText = currentQty;
-    }
-
-    function sendOrder() {
-        const name = document.getElementById('custName').value;
-        if (!name) { alert("Please enter your name!"); return; }
-        let orderItems = ""; let total = 0;
-        document.querySelectorAll('.item').forEach(item => {
-            const qty = parseInt(item.querySelector('.qty').innerText);
-            if (qty > 0) {
-                const n = item.getAttribute('data-name'); const p = parseInt(item.getAttribute('data-price'));
-                orderItems += `• ${n} x ${qty} = ₹${p * qty}%0A`;
-                total += p * qty;
-            }
-        });
-        if (total === 0) { alert("Select items!"); return; }
-        window.open(`https://wa.me/918697781622?text=*New Order*%0A*Name:* ${name}%0A${orderItems}*Total: ₹${total}*`, '_blank');
-    }
-</script>
-</body>
-</html>
+                    <button class="btn-qty" onclick="changeQty(
