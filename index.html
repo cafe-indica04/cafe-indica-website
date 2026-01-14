@@ -6,55 +6,58 @@
     <title>Cafe Indica - Order Online</title>
     <style>
         :root { --cafe-brown: #6f4e37; --bg-cream: #fdf5e6; --whatsapp-green: #25d366; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-cream); margin: 0; padding-bottom: 120px; color: #333; }
-        .header { text-align: center; background: var(--cafe-brown); color: white; padding: 30px 10px; border-radius: 0 0 40px 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .container { padding: 15px; max-width: 500px; margin: auto; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-cream); margin: 0; padding-bottom: 120px; color: #333; }
+        
+        .header { text-align: center; background: var(--cafe-brown); color: white; padding: 25px 10px; border-radius: 0 0 30px 30px; }
+        .logo-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid white; margin-bottom: 10px; object-fit: cover; }
+        
+        .container { padding: 15px; max-width: 600px; margin: auto; }
         .customer-info { background: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .customer-info label { font-weight: bold; display: block; margin-bottom: 8px; color: var(--cafe-brown); }
-        .customer-info input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
-        .category { background: #e6ccb2; padding: 10px 15px; border-radius: 10px; margin: 25px 0 10px; font-weight: bold; color: var(--cafe-brown); border-left: 6px solid var(--cafe-brown); }
-        .item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 15px; margin-bottom: 10px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .item-name { font-weight: bold; font-size: 1.1em; display: block; }
-        .item-price { color: var(--cafe-brown); font-weight: bold; font-size: 0.9em; }
-        .qty-controls { display: flex; align-items: center; gap: 12px; }
+        .customer-info input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+
+        .category { background: #e6ccb2; padding: 10px 15px; border-radius: 10px; margin: 25px 0 10px; font-weight: bold; color: var(--cafe-brown); border-left: 6px solid var(--cafe-brown); display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        
+        .item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 12px 15px; margin-bottom: 8px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .item-name { font-weight: bold; font-size: 1.05em; display: block; }
+        .item-price { color: var(--cafe-brown); font-weight: bold; }
+        .old-price { text-decoration: line-through; color: #888; font-size: 0.8em; margin-right: 5px; }
+        .combo-tag { background: #ff4757; color: white; font-size: 0.7em; padding: 2px 8px; border-radius: 5px; margin-left: 5px; }
+
+        .qty-controls { display: flex; align-items: center; gap: 10px; }
         .btn-qty { background: var(--cafe-brown); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 20px; font-weight: bold; }
-        .qty { font-weight: bold; min-width: 20px; text-align: center; }
+        .qty { font-weight: bold; min-width: 15px; text-align: center; }
+        
+        /* Photo Gallery Section */
+        .gallery-title { text-align: center; color: var(--cafe-brown); margin: 30px 0 10px; font-weight: bold; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-bottom: 20px; }
+        .gallery img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 3px solid white; }
+
         .footer { position: fixed; bottom: 0; width: 100%; background: white; padding: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; z-index: 1000; }
-        .btn-order { background: var(--whatsapp-green); color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 18px; font-weight: bold; width: 100%; max-width: 400px; cursor: pointer; transition: transform 0.2s; }
-        .btn-order:active { transform: scale(0.98); }
+        .btn-order { background: var(--whatsapp-green); color: white; border: none; padding: 15px; border-radius: 30px; font-size: 18px; font-weight: bold; width: 100%; max-width: 400px; cursor: pointer; transition: 0.3s; }
+        .btn-order:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
 
 <div class="header">
+    <img src="logo.jpg" alt="Cafe Indica Logo" class="logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2734/2734033.png'">
     <h1 style="margin:0;">Cafe Indica</h1>
-    <p style="margin:5px 0 0;">Digital Menu Card</p>
+    <p style="margin:5px 0 0; opacity: 0.9;">Best Food, Better Mood</p>
 </div>
 
 <div class="container">
     <div class="customer-info">
         <label>आपका नाम (Your Name)</label>
-        <input type="text" id="custName" placeholder="Type your name...">
+        <input type="text" id="custName" placeholder="Type your name here...">
     </div>
 
-    <div class="category">Best Sellers</div>
-    
-    <div class="item" data-name="Masala Chai" data-price="30">
-        <div><span class="item-name">Masala Chai</span><span class="item-price">₹30</span></div>
-        <div class="qty-controls">
-            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
-            <span class="qty">0</span>
-            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
-        </div>
-    </div>
+    <div id="menu-container"></div>
 
-    <div class="item" data-name="Cold Coffee" data-price="80">
-        <div><span class="item-name">Cold Coffee</span><span class="item-price">₹80</span></div>
-        <div class="qty-controls">
-            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
-            <span class="qty">0</span>
-            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
-        </div>
+    <div class="gallery-title">📸 OUR CAFE VIBES</div>
+    <div class="gallery">
+        <img src="cafe.jpg" alt="Interior 1" onerror="this.style.display='none'">
+        <img src="cafe2.jpg" alt="Interior 2" onerror="this.style.display='none'">
     </div>
 </div>
 
@@ -63,6 +66,49 @@
 </div>
 
 <script>
+    const menuData = [
+        { cat: "🎁 COMBO SPECIALS", items: [
+            {n: "Fries(M) + Veg Burger + Drink", p: 149, old: 167},
+            {n: "Fries(M) + Chicken Burger + Drink", p: 167, old: 187},
+            {n: "2 Chkn Sandwich + 5 Fish Finger", p: 269, old: 287}
+        ]},
+        { cat: "🥪 SANDWICH & BURGER", items: [
+            {n: "Veg Sandwich", p: 69}, {n: "Veg Cheese Sandwich", p: 89}, 
+            {n: "Chicken Burger", p: 79}, {n: "Chicken Cheese Burger", p: 99},
+            {n: "Veg Burger", p: 59}, {n: "Extra Cheese 🧀", p: 20}
+        ]},
+        { cat: "☕ TEA & COFFEE", items: [
+            {n: "Milk Tea", p: 19}, {n: "Masala Lemon Tea", p: 19}, 
+            {n: "Cold Coffee", p: 69}, {n: "Black Coffee", p: 19},
+            {n: "Virgin Mojito", p: 79}, {n: "Kacha Mango Mojito", p: 69}
+        ]},
+        { cat: "🍟 SNACKS & MAGGIE", items: [
+            {n: "French Fries", p: 59}, {n: "Chicken Nugget (5ps)", p: 79}, 
+            {n: "Fish Finger (5ps)", p: 119}, {n: "Veg Maggie", p: 49},
+            {n: "Chicken Maggie", p: 79}
+        ]}
+    ];
+
+    const container = document.getElementById('menu-container');
+    menuData.forEach(section => {
+        let sectionHtml = `<div class="category">${section.cat}</div>`;
+        section.items.forEach(item => {
+            sectionHtml += `
+            <div class="item" data-name="${item.n}" data-price="${item.p}">
+                <div>
+                    <span class="item-name">${item.n} ${item.old ? '<span class="combo-tag">SAVE</span>' : ''}</span>
+                    <span class="item-price">${item.old ? '<span class="old-price">₹'+item.old+'</span>' : ''}₹${item.p}</span>
+                </div>
+                <div class="qty-controls">
+                    <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                    <span class="qty">0</span>
+                    <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                </div>
+            </div>`;
+        });
+        container.innerHTML += sectionHtml;
+    });
+
     function changeQty(btn, change) {
         const qtySpan = btn.parentElement.querySelector('.qty');
         let currentQty = parseInt(qtySpan.innerText);
@@ -72,28 +118,27 @@
 
     function sendOrder() {
         const name = document.getElementById('custName').value;
-        if (!name) { alert("कृपया अपना नाम लिखें!"); return; }
+        if (!name) { alert("Please enter your name!"); return; }
 
-        let orderText = `*New Order from Cafe Indica*%0A%0A*Name:* ${name}%0A--------------------------%0A`;
+        let orderItems = "";
         let total = 0;
         let hasItems = false;
 
         document.querySelectorAll('.item').forEach(item => {
             const qty = parseInt(item.querySelector('.qty').innerText);
             if (qty > 0) {
-                const itemName = item.getAttribute('data-name');
-                const price = parseInt(item.getAttribute('data-price'));
-                orderText += `• ${itemName} [x${qty}] = ₹${price * qty}%0A`;
-                total += price * qty;
+                const n = item.getAttribute('data-name');
+                const p = parseInt(item.getAttribute('data-price'));
+                orderItems += `• ${n} x ${qty} = ₹${p * qty}%0A`;
+                total += p * qty;
                 hasItems = true;
             }
         });
 
-        if (!hasItems) { alert("कम से कम एक आइटम चुनें!"); return; }
+        if (!hasItems) { alert("Please select at least one item!"); return; }
 
-        orderText += `--------------------------%0A*Total Bill: ₹${total}*`;
-        const phoneNumber = "918697781622"; 
-        window.open(`https://wa.me/${phoneNumber}?text=${orderText}`, '_blank');
+        const text = `*New Order: Cafe Indica*%0A*Customer:* ${name}%0A---%0A${orderItems}---%0A*Total Bill: ₹${total}*%0A%0APlease confirm my order!`;
+        window.open(`https://wa.me/918697781622?text=${text}`, '_blank');
     }
 </script>
 
